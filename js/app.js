@@ -331,6 +331,7 @@
           h('button', { type: 'button', class: 'knop licht', onclick: () => { bw.sessies.push({ type: 'droog', titel: '', datum: '', tijd: '19:00', locatie: '', blokken: [] }); teken(); update(); } }, '+ Sessie toevoegen'),
           h('a', { class: 'knop licht', href: '#/voorbeeld', text: 'Voorbeeld bekijken' })),
         publiceerKaart(),
+        verwijderKaart(),
         h('section', { class: 'kaart', style: 'margin-top:16px' },
           h('h2', { text: 'Zelf opslaan' }),
           h('div', { class: 'rij' },
@@ -369,6 +370,31 @@
         ingesteld ? h('p', { class: 'meta', text: 'Zet het schema met één klik online. Vul eenmalig de clubcode in, die krijg je van de beheerder.' })
           : h('div', { class: 'kader', text: 'Publiceren is nog niet ingesteld: vul publiceren_url in data/config.json in (zie README). Tot die tijd kun je het schema zelf opslaan (onderaan).' }),
         veld('Clubcode (eenmalig)', code), h('div', { class: 'rij', style: 'margin-top:10px' }, knop), status);
+    }
+    function verwijderKaart() {
+      const kies = h('select', null, h('option', { value: '', text: 'Kies het schema dat weg moet…' }),
+        ...cache.index.weken.map((w) => h('option', { value: w.id, text: w.titel })));
+      const code = h('input', { type: 'password', autocomplete: 'off', placeholder: 'Clubcode' }); // bewust leeg: je bevestigt met de code
+      const status = h('p', { class: 'meta', role: 'status' });
+      const knop = h('button', { type: 'button', class: 'knop gevaar' }, 'Verwijder schema');
+      knop.addEventListener('click', async () => {
+        status.textContent = ''; status.style.color = '';
+        const w = cache.index.weken.find((x) => x.id === kies.value);
+        if (!w) { status.textContent = 'Kies eerst het schema dat je wilt verwijderen.'; status.style.color = '#c0392b'; return; }
+        if (!code.value.trim()) { status.textContent = 'Vul de clubcode in om te bevestigen.'; status.style.color = '#c0392b'; return; }
+        if (!confirm('Weet je zeker dat je "' + w.titel + '" wilt verwijderen? Het schema verdwijnt uit de site. Alleen de beheerder kan het nog terughalen.')) return;
+        knop.disabled = true; knop.textContent = 'Bezig met verwijderen…';
+        try {
+          await window.verwijderSchema(w.id, cache.config, code.value.trim());
+          cache.index.weken = cache.index.weken.filter((x) => x.id !== w.id); delete cache.weken[w.id];
+          kies.querySelector('option[value="' + w.id + '"]').remove(); kies.value = ''; code.value = '';
+          status.textContent = '"' + w.titel + '" is verwijderd. Over ongeveer een minuut is het ook van de site verdwenen.';
+        } catch (e) { status.textContent = e.message || String(e); status.style.color = '#c0392b'; }
+        finally { knop.disabled = false; knop.textContent = 'Verwijder schema'; }
+      });
+      return h('section', { class: 'kaart', style: 'margin-top:16px' }, h('h2', { text: 'Schema verwijderen' }),
+        h('p', { class: 'meta', text: 'Haal een schema van de site. Bevestig met de clubcode. Dit geldt voor het hele schema met al zijn trainingen.' }),
+        veld('Schema', kies), h('div', { style: 'height:8px' }), veld('Clubcode om te bevestigen', code), h('div', { class: 'rij', style: 'margin-top:10px' }, knop), status);
     }
     function downloadWeek() {
       if (!bw.id || !ids()) { toast('Vul eerst een code in, zoals 2026-w42'); return; }

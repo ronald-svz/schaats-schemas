@@ -153,6 +153,29 @@ async function bewaar(env, pad, inhoud, bericht, bijwerken) {
   }
 }
 
+
+// Een weekschema verwijderen. Eerst uit het overzicht, daarna het bestand, zodat er nooit een verwijzing naar een ontbrekend bestand overblijft.
+async function verwijderWeek(env, id, trainer) {
+  await bewaar(env, 'data/index.json', null, 'Weekoverzicht bijgewerkt: ' + id + ' verwijderd (door ' + trainer + ')', (huidig) => {
+    const index = huidig ? JSON.parse(huidig) : { weken: [] };
+    index.weken = (index.weken || []).filter((w) => w.id !== id);
+    return JSON.stringify(index, null, 2) + '\n';
+  });
+  const pad = 'data/weken/' + id + '.json';
+  for (let poging = 0; poging < 3; poging++) {
+    const bestand = await gh(env, pad);
+    if (!bestand) return false; // bestond al niet meer
+    try {
+      await gh(env, pad, { method: 'DELETE', body: { message: 'Schema ' + id + ' verwijderd (door ' + trainer + ')', sha: bestand.sha, branch: env.GITHUB_BRANCH || 'main' } });
+      return true;
+    } catch (e) {
+      if ((e.status === 409 || e.status === 422) && poging < 2) continue;
+      throw e;
+    }
+  }
+  return false;
+}
+
 function zoekTrainer(env, code) {
   const lijst = String(env.CLUB_CODES || '').split(',').map((s) => s.trim()).filter(Boolean);
   let gevonden = null;
@@ -205,6 +228,19 @@ export default {
       }
       return antwoord(200, { ok: true }, c.headers);
     }
+
+    if (soort === 'verwijder-week') {
+      const id = String(invoer.id || '');
+      if (!/^\d{4}-w\d{1,2}$/.test(id)) return antwoord(400, { ok: false, fout: 'De code van de week moet er zo uitzien: 2026-w42.' }, c.headers);
+      try {
+        const bestond = await verwijderWeek(env, id, trainer);
+        return antwoord(200, { ok: true, bestond }, c.headers);
+      } catch (e) {
+        return antwoord(502, { ok: false, fout: 'Verwijderen bij GitHub is niet gelukt. Probeer het zo nog een keer.' }, c.headers);
+      }
+    }
+
+    if (soort !== 'week') return antwoord(400, { ok: false, fout: 'Onbekende opdracht. Is de publicatiedienst bijgewerkt?' }, c.headers);
 
     const probleem = controleer(invoer.week);
     if (probleem) return antwoord(400, { ok: false, fout: probleem }, c.headers);

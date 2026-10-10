@@ -73,6 +73,7 @@ Voeg een blok toe aan `data/oefeningen.json`:
 
 ## Wat de site doet
 - **Schema's bekijken:** per week de sessies en blokken, met per oefening uitleg, foto's, video's en animaties. Elke week heeft een eigen link om te delen.
+- **Schema verwijderen:** in de bouwer, bevestigd met de clubcode. Het schema verdwijnt uit de site; de GitHub-geschiedenis houdt het bij.
 - **Oefeningen:** doorzoekbare bibliotheek. Trainers kunnen oefeningen toevoegen en bewerken (`#/oefening-maken`).
 - **Eigen animaties maken:** rijders op de ijsbaan naar de juiste plek slepen, stap voor stap. Met één stap maak je een stilstaande tekening. Startvoorbeelden: kop over kop en steigerung.
 - **AI-hulp:** een voorstel voor tekst en animatie laten maken. Zonder instellingen kopieer je een opdracht naar je eigen AI-assistent en plak je het antwoord terug. Met een API-sleutel in de publicatiedienst werkt het met één klik.

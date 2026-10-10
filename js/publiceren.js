@@ -50,6 +50,10 @@
     if (!/^[a-z0-9][a-z0-9-]{1,59}$/.test(oefening.id || '')) throw new Error('Geef de oefening een naam met letters of cijfers.');
     await stuur(cfg, code, { soort: 'oefening', oefening });
   };
+  window.verwijderSchema = async function (id, cfg, code) {
+    if (!/^\d{4}-w\d{1,2}$/.test(id || '')) throw new Error('Kies eerst een schema.');
+    await stuur(cfg, code, { soort: 'verwijder-week', id });
+  };
   window.vraagAI = async function (beschrijving, cfg, code) {
     if (!beschrijving || beschrijving.trim().length < 10) throw new Error('Beschrijf de oefening eerst in een paar zinnen.');
     return stuur(cfg, code, { soort: 'ai', beschrijving: beschrijving.trim() });
