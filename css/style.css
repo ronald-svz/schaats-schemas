@@ -48,7 +48,7 @@ main { max-width: 860px; margin: 0 auto; padding: 16px; outline: none; }
 .weeklijst { list-style: none; margin: 0; padding: 0; }
 .weeklijst li a { display: block; padding: 12px 0; border-bottom: 1px solid var(--rand); text-decoration: none; color: inherit; }
 .weeklijst li:last-child a { border-bottom: 0; }
-.weeklijst .titel { font-weight: 600; } .weeklijst .sub { color: var(--zacht); font-size: .9rem; }
+.weeklijst .titel { font-weight: 600; } .weeklijst .titel .chip { margin: 0 2px; vertical-align: 1px; } .weeklijst .sub { color: var(--zacht); font-size: .9rem; }
 .sessie-kop { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin-bottom: 8px; }
 .sessie-kop .datum { font-weight: 700; font-size: 1.1rem; }
 .sessie-kop .datum::first-letter { text-transform: uppercase; }
@@ -106,3 +106,8 @@ dialog#lightbox img { max-width: 100%; max-height: 70vh; display: block; margin:
   details.oef > .oef-body { display: block; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+.dagkop { font-weight: 700; }
+.dagkop::first-letter { text-transform: uppercase; }
+.weekkop { margin: 14px 0 2px; font-size: .9rem; font-weight: 600; color: var(--zacht); }
+.weekkop:first-child { margin-top: 2px; }
+a.chip { text-decoration: none; }

@@ -1,0 +1,18 @@
+{
+  "id": "2026-10-04-weekend",
+  "type": "weekend",
+  "titel": "Zondag: duurrit op de racefiets",
+  "datum": "2026-10-04",
+  "doel": "Schaatsoefeningen met name gericht op bochttechniek. Korte intensieve intervallen (uithoudingsvermogen, snelheid).",
+  "trainingsblok": "VP2",
+  "intensiteit": "80%",
+  "bijzonderheden": "Zaterdag 3 oktober schaatsen in Leeuwarden.",
+  "tekst": "Extensieve duurtraining met korte versnellingen, 90 minuten.",
+  "items": [
+    {
+      "oef": "duurrit-racefiets",
+      "detail": "90 minuten"
+    }
+  ],
+  "blokken": []
+}

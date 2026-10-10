@@ -1,0 +1,80 @@
+{
+  "id": "2026-10-05-droog",
+  "type": "droog",
+  "titel": "Indoor droogtraining",
+  "datum": "2026-10-05",
+  "tijd": "19:00",
+  "locatie": "Greijdanus, gymzaal 4 (Campus 5 Zwolle)",
+  "doel": "Schaatsoefeningen met name gericht op bochttechniek. Korte intensieve intervallen (uithoudingsvermogen, snelheid).",
+  "trainingsblok": "VP2",
+  "intensiteit": "60%",
+  "bijzonderheden": "Vanaf woensdag 21 oktober, 19:00 uur, indoortraining in gymzaal Zwarteweg Zwolle-Zuid.",
+  "blokken": [
+    {
+      "naam": "Warming-up",
+      "minuten": 15,
+      "zone": 1,
+      "items": [
+        {
+          "oef": "inlopen-dynamisch",
+          "detail": "Inlopen, dynamische oefeningen, coördinatie- en stabiliteitsoefeningen"
+        }
+      ]
+    },
+    {
+      "naam": "Steigerungen / start / sprint",
+      "minuten": 10,
+      "items": [
+        {
+          "oef": "steigerungen-droog",
+          "detail": "Steigerungen, starten, sprinten en snelheid"
+        }
+      ]
+    },
+    {
+      "naam": "Schaatstechniek",
+      "minuten": 10,
+      "items": [
+        {
+          "oef": "bochtpassen-cornerbelt",
+          "detail": "Bochtpassen in de cornerbelt"
+        },
+        {
+          "oef": "schaatssprongen",
+          "detail": "Schaatspassen en -sprongen (coördinatie, gericht op techniek)"
+        }
+      ]
+    },
+    {
+      "naam": "Rompstabiliteit en coördinatie",
+      "minuten": 10,
+      "items": [
+        {
+          "oef": "rompstabiliteit",
+          "detail": "Diverse oefeningen: statisch en dynamisch (planken, buik, rug)"
+        }
+      ]
+    },
+    {
+      "naam": "Kracht- en sprongoefeningen",
+      "minuten": 10,
+      "items": [
+        {
+          "oef": "kracht-boxjumps",
+          "detail": "Diverse krachtoefeningen en sprongen (o.a. boxjumps), afsluiten met techniekoefeningen"
+        }
+      ]
+    },
+    {
+      "naam": "Cooling-down",
+      "minuten": 5,
+      "zone": 1,
+      "items": [
+        {
+          "oef": "uitlopen-rekken",
+          "detail": "Uitlopen en enkele statische rekoefeningen"
+        }
+      ]
+    }
+  ]
+}

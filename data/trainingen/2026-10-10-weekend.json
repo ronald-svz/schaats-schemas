@@ -1,0 +1,18 @@
+{
+  "id": "2026-10-10-weekend",
+  "type": "weekend",
+  "titel": "Weekend: duurrit op de racefiets",
+  "datum": "2026-10-10",
+  "doel": "Schaatsoefeningen met name gericht op bochttechniek. Korte intensieve intervallen (uithoudingsvermogen, snelheid).",
+  "trainingsblok": "VP2",
+  "intensiteit": "60%",
+  "bijzonderheden": "Vanaf woensdag 21 oktober, 19:00 uur, indoortraining in gymzaal Zwarteweg Zwolle-Zuid.",
+  "tekst": "Extensieve duurtraining met versnellingen, 90-120 minuten (met bijvoorbeeld korte versnellingen op een heuvel of tot het plaatsnaambord).",
+  "items": [
+    {
+      "oef": "duurrit-racefiets",
+      "detail": "90-120 minuten, zaterdag of zondag"
+    }
+  ],
+  "blokken": []
+}

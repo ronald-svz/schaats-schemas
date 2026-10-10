@@ -1,5 +1,5 @@
 /* Publicatiedienst voor de schema-bouwer (Cloudflare Worker).
-   Ontvangt {code, week}, controleert de clubcode en schrijft het weekschema naar GitHub.
+   Ontvangt {code, training}, controleert de clubcode en schrijft het weekschema naar GitHub.
    De GitHub-sleutel staat alleen hier als geheim (GITHUB_TOKEN), nooit in de browser.
 
    Instellingen (zie README.md in deze map):
@@ -10,7 +10,11 @@
      optioneel geheim ANTHROPIC_API_KEY  zet AI-hulp aan (kost een paar cent per aanvraag); variabele AI_MODEL (standaard claude-sonnet-5-5)
 */
 
-const MAX_BYTES = 200000;
+const MAX_BYTES = 400000;
+// Code van een training: de datum, eventueel gevolgd door groep, kamp of soort, bijvoorbeeld 2026-10-13-junioren-ijs
+const ID_RE = /^\d{4}-\d{2}-\d{2}(-[a-z0-9]+){0,5}$/;
+const ID_FOUT = 'De code moet beginnen met de datum, bijvoorbeeld 2026-10-13-junioren-ijs (kleine letters, cijfers en streepjes).';
+const DATUM_RE = /^\d{4}-\d{2}-\d{2}$/;
 const TYPES = ['droog', 'ijs', 'weekend', 'rust'];
 
 function cors(env, request) {
@@ -32,27 +36,34 @@ function antwoord(status, body, headers) {
 }
 function tekst(v, max) { return typeof v === 'string' ? v.slice(0, max || 2000) : undefined; }
 function getal(v) { const n = Number(v); return Number.isFinite(n) && n >= 0 && n <= 1000 ? n : undefined; }
+// Groep: een korte code zoals 'junioren'. Leeg of 'iedereen' betekent alle groepen.
+function slugTekst(v) { const s = typeof v === 'string' ? v.trim().toLowerCase() : ''; return /^[a-z0-9][a-z0-9-]{1,29}$/.test(s) && s !== 'iedereen' ? s : undefined; }
+// Een schema hoort bij nul (alle groepen), een of meer groepen. Het oude veld 'groep' blijft werken.
+function groepenLijst(w) {
+  const l = [].concat(Array.isArray(w.groepen) ? w.groepen : [], w.groep ? [w.groep] : []).map(slugTekst).filter(Boolean);
+  const uniek = Array.from(new Set(l)).slice(0, 8);
+  return uniek.length ? uniek : undefined;
+}
 function schoon(obj) { const o = {}; for (const k in obj) if (obj[k] !== undefined && obj[k] !== '') o[k] = obj[k]; return o; }
 
 // Alleen bekende velden doorlaten, met een maximale lengte. Zo kan niemand rommel in de bestanden zetten.
-function opschonen(w) {
+// Een training is een schema voor een dag: datum, tijd, plaats, groepen, blokken met oefeningen.
+function opschonenTraining(t) {
   const item = (i) => schoon({ oef: tekst(i && i.oef, 80), detail: tekst(i && i.detail) });
   const blok = (b) => schoon({ naam: tekst(b && b.naam, 200), minuten: getal(b && b.minuten), zone: [1, 2, 3, 4, 5].includes(Number(b && b.zone)) ? Number(b.zone) : undefined, omschrijving: tekst(b && b.omschrijving), items: Array.isArray(b && b.items) ? b.items.slice(0, 30).map(item) : [] });
-  const sessie = (s) => schoon({
-    type: TYPES.includes(s && s.type) ? s.type : 'droog', titel: tekst(s && s.titel, 200), datum: /^\d{4}-\d{2}-\d{2}$/.test((s && s.datum) || '') ? s.datum : undefined,
-    tijd: /^\d{2}:\d{2}$/.test((s && s.tijd) || '') ? s.tijd : undefined, locatie: tekst(s && s.locatie, 300), tekst: tekst(s && s.tekst),
-    blokken: Array.isArray(s && s.blokken) ? s.blokken.slice(0, 30).map(blok) : [], items: Array.isArray(s && s.items) && s.items.length ? s.items.slice(0, 30).map(item) : undefined
+  return schoon({
+    id: t.id, type: TYPES.includes(t.type) ? t.type : 'droog', titel: tekst(t.titel, 200), datum: DATUM_RE.test(t.datum || '') ? t.datum : undefined,
+    tijd: /^\d{2}:\d{2}$/.test(t.tijd || '') ? t.tijd : undefined, locatie: tekst(t.locatie, 300), groepen: groepenLijst(t), kamp: tekst(t.kamp, 80),
+    doel: tekst(t.doel), trainingsblok: tekst(t.trainingsblok, 50), intensiteit: tekst(t.intensiteit, 50), bijzonderheden: tekst(t.bijzonderheden), tekst: tekst(t.tekst),
+    blokken: Array.isArray(t.blokken) ? t.blokken.slice(0, 30).map(blok) : [], items: Array.isArray(t.items) && t.items.length ? t.items.slice(0, 30).map(item) : undefined
   });
-  return schoon({ id: w.id, titel: tekst(w.titel, 200), doel: tekst(w.doel), trainingsblok: tekst(w.trainingsblok, 50), intensiteit: tekst(w.intensiteit, 50), bijzonderheden: tekst(w.bijzonderheden), sessies: w.sessies.slice(0, 14).map(sessie) });
 }
-function controleer(w) {
-  if (!w || typeof w !== 'object') return 'Geen schema ontvangen.';
-  if (!/^\d{4}-w\d{1,2}$/.test(w.id || '')) return 'De code van de week moet er zo uitzien: 2026-w42.';
-  if (!tekst(w.titel)) return 'Vul een titel in.';
-  if (!Array.isArray(w.sessies) || !w.sessies.some((s) => s && /^\d{4}-\d{2}-\d{2}$/.test(s.datum || ''))) return 'Voeg minstens één sessie met een datum toe.';
+function controleerTraining(t) {
+  if (!t || typeof t !== 'object') return 'Geen training ontvangen.';
+  if (!ID_RE.test(t.id || '') || t.id.length > 60) return ID_FOUT;
+  if (!DATUM_RE.test(t.datum || '')) return 'Vul de datum van de training in.';
   return '';
 }
-
 
 const ANIMS = ['kop-over-kop', 'steigerung', 'scene'];
 const KLEUR = /^#[0-9a-fA-F]{6}$/;
@@ -154,19 +165,19 @@ async function bewaar(env, pad, inhoud, bericht, bijwerken) {
 }
 
 
-// Een weekschema verwijderen. Eerst uit het overzicht, daarna het bestand, zodat er nooit een verwijzing naar een ontbrekend bestand overblijft.
-async function verwijderWeek(env, id, trainer) {
-  await bewaar(env, 'data/index.json', null, 'Weekoverzicht bijgewerkt: ' + id + ' verwijderd (door ' + trainer + ')', (huidig) => {
-    const index = huidig ? JSON.parse(huidig) : { weken: [] };
-    index.weken = (index.weken || []).filter((w) => w.id !== id);
+// Een training verwijderen. Eerst uit het overzicht, daarna het bestand, zodat er nooit een verwijzing naar een ontbrekend bestand overblijft.
+async function verwijderTraining(env, id, trainer) {
+  await bewaar(env, 'data/index.json', null, 'Overzicht bijgewerkt: ' + id + ' verwijderd (door ' + trainer + ')', (huidig) => {
+    const index = huidig ? JSON.parse(huidig) : { trainingen: [] };
+    index.trainingen = (index.trainingen || []).filter((x) => x.id !== id);
     return JSON.stringify(index, null, 2) + '\n';
   });
-  const pad = 'data/weken/' + id + '.json';
+  const pad = 'data/trainingen/' + id + '.json';
   for (let poging = 0; poging < 3; poging++) {
     const bestand = await gh(env, pad);
     if (!bestand) return false; // bestond al niet meer
     try {
-      await gh(env, pad, { method: 'DELETE', body: { message: 'Schema ' + id + ' verwijderd (door ' + trainer + ')', sha: bestand.sha, branch: env.GITHUB_BRANCH || 'main' } });
+      await gh(env, pad, { method: 'DELETE', body: { message: 'Training ' + id + ' verwijderd (door ' + trainer + ')', sha: bestand.sha, branch: env.GITHUB_BRANCH || 'main' } });
       return true;
     } catch (e) {
       if ((e.status === 409 || e.status === 422) && poging < 2) continue;
@@ -203,7 +214,7 @@ export default {
     const trainer = zoekTrainer(env, String(invoer.code || ''));
     if (!trainer) { await new Promise((r) => setTimeout(r, 700)); return antwoord(401, { ok: false, fout: 'De clubcode klopt niet.' }, c.headers); }
 
-    const soort = invoer.soort || 'week';
+    const soort = invoer.soort || 'training';
 
     if (soort === 'ai') {
       const vraag = tekst(invoer.beschrijving, 1500);
@@ -229,31 +240,30 @@ export default {
       return antwoord(200, { ok: true }, c.headers);
     }
 
-    if (soort === 'verwijder-week') {
+    if (soort === 'verwijder-training') {
       const id = String(invoer.id || '');
-      if (!/^\d{4}-w\d{1,2}$/.test(id)) return antwoord(400, { ok: false, fout: 'De code van de week moet er zo uitzien: 2026-w42.' }, c.headers);
+      if (!ID_RE.test(id) || id.length > 60) return antwoord(400, { ok: false, fout: ID_FOUT }, c.headers);
       try {
-        const bestond = await verwijderWeek(env, id, trainer);
+        const bestond = await verwijderTraining(env, id, trainer);
         return antwoord(200, { ok: true, bestond }, c.headers);
       } catch (e) {
         return antwoord(502, { ok: false, fout: 'Verwijderen bij GitHub is niet gelukt. Probeer het zo nog een keer.' }, c.headers);
       }
     }
 
-    if (soort !== 'week') return antwoord(400, { ok: false, fout: 'Onbekende opdracht. Is de publicatiedienst bijgewerkt?' }, c.headers);
+    if (soort !== 'training') return antwoord(400, { ok: false, fout: 'Onbekende opdracht. Is de publicatiedienst bijgewerkt?' }, c.headers);
 
-    const probleem = controleer(invoer.week);
+    const probleem = controleerTraining(invoer.training);
     if (probleem) return antwoord(400, { ok: false, fout: probleem }, c.headers);
-    const week = opschonen(invoer.week);
-    const start = week.sessies.map((s) => s.datum).filter(Boolean).sort()[0];
+    const training = opschonenTraining(invoer.training);
 
     try {
-      await bewaar(env, 'data/weken/' + week.id + '.json', JSON.stringify(week, null, 2) + '\n', 'Schema ' + week.titel + ' (door ' + trainer + ')');
-      await bewaar(env, 'data/index.json', null, 'Weekoverzicht bijgewerkt: ' + week.titel + ' (door ' + trainer + ')', (huidig) => {
-        const index = huidig ? JSON.parse(huidig) : { weken: [] };
-        index.weken = (index.weken || []).filter((w) => w.id !== week.id);
-        index.weken.push({ id: week.id, titel: week.titel, start, bijzonderheden: week.bijzonderheden || '' });
-        index.weken.sort((a, b) => String(b.start).localeCompare(String(a.start)));
+      await bewaar(env, 'data/trainingen/' + training.id + '.json', JSON.stringify(training, null, 2) + '\n', 'Training ' + training.datum + ' ' + (training.titel || training.type) + ' (door ' + trainer + ')');
+      await bewaar(env, 'data/index.json', null, 'Overzicht bijgewerkt: ' + training.datum + ' ' + (training.titel || training.type) + ' (door ' + trainer + ')', (huidig) => {
+        const index = huidig ? JSON.parse(huidig) : { trainingen: [] };
+        index.trainingen = (index.trainingen || []).filter((x) => x.id !== training.id);
+        index.trainingen.push(schoon({ id: training.id, datum: training.datum, tijd: training.tijd, type: training.type, titel: training.titel, groepen: training.groepen, kamp: training.kamp, locatie: training.locatie }));
+        index.trainingen.sort((a, b) => (String(b.datum) + String(b.tijd || '')).localeCompare(String(a.datum) + String(a.tijd || '')));
         return JSON.stringify(index, null, 2) + '\n';
       });
     } catch (e) {

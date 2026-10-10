@@ -6,13 +6,13 @@ Deze kleine dienst zit tussen de bouwer en GitHub. De trainer vult een **clubcod
 Trainer  --clubcode + schema-->  Worker  --GitHub-sleutel-->  GitHub  -->  GitHub Pages  -->  site
 ```
 
-De dienst kan vier dingen:
-1. een weekschema opslaan en het weekoverzicht bijwerken;
-2. een weekschema verwijderen (uit het overzicht en het bestand);
+De dienst kan vier dingen (een schema is een training: een dag met tijd, plaats en groepen):
+1. een training opslaan en het overzicht bijwerken;
+2. een training verwijderen (uit het overzicht en het bestand);
 3. een oefening opslaan of vervangen (inclusief eigen animatie);
 4. optioneel: met AI een voorstel voor een oefening en animatie maken.
 
-Hij laat alleen bekende velden door, met een maximale lengte, en schrijft alleen naar `data/weken/<code>.json`, `data/index.json` en `data/oefeningen.json`. Een verwijderd schema blijft terug te vinden in de GitHub-geschiedenis.
+Hij laat alleen bekende velden door, met een maximale lengte, en schrijft alleen naar `data/trainingen/<code>.json`, `data/index.json` en `data/oefeningen.json`. Een verwijderd schema blijft terug te vinden in de GitHub-geschiedenis.
 
 **Na een wijziging in `worker.js` moet je de code opnieuw in Cloudflare plakken** (Edit code, alles vervangen, Deploy). De variabelen en geheimen blijven staan.
 

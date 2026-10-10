@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-28-droog",
+  "type": "droog",
+  "titel": "Indoor droogtraining",
+  "datum": "2026-09-28",
+  "tijd": "19:00",
+  "locatie": "Greijdanus, gymzaal 4 (Campus 5 Zwolle)",
+  "doel": "Schaatsoefeningen met name gericht op bochttechniek. Korte intensieve intervallen (uithoudingsvermogen, snelheid).",
+  "trainingsblok": "VP2",
+  "intensiteit": "80%",
+  "bijzonderheden": "Zaterdag 3 oktober schaatsen in Leeuwarden.",
+  "blokken": [
+    {
+      "naam": "Warming-up",
+      "minuten": 15,
+      "zone": 1,
+      "items": [
+        {
+          "oef": "inlopen-dynamisch",
+          "detail": "Inlopen, dynamische oefeningen, coördinatie- en stabiliteitsoefeningen"
+        }
+      ]
+    },
+    {
+      "naam": "Schaatstechniek",
+      "minuten": 10,
+      "items": [
+        {
+          "oef": "schaatssprongen",
+          "detail": "Schaatspassen en -sprongen (coördinatie, gericht op techniek)"
+        }
+      ]
+    },
+    {
+      "naam": "Rompstabiliteit en coördinatie",
+      "minuten": 10,
+      "items": [
+        {
+          "oef": "rompstabiliteit",
+          "detail": "Diverse oefeningen: statisch en dynamisch (planken, buik, rug)"
+        }
+      ]
+    },
+    {
+      "naam": "Kracht- en sprongoefeningen",
+      "minuten": 20,
+      "items": [
+        {
+          "oef": "kracht-boxjumps",
+          "detail": "Diverse krachtoefeningen en sprongen (o.a. boxjumps), afsluiten met techniekoefeningen"
+        }
+      ]
+    },
+    {
+      "naam": "Cooling-down",
+      "minuten": 5,
+      "zone": 1,
+      "items": [
+        {
+          "oef": "uitlopen-rekken",
+          "detail": "Uitlopen en enkele statische rekoefeningen"
+        }
+      ]
+    }
+  ]
+}

@@ -3,5 +3,23 @@
   "repo": "schaats-schemas",
   "branch": "main",
   "publiceren_url": "https://schaats-publicatie.ronaldtenberge.workers.dev",
-  "ai": false
+  "ai": false,
+  "groepen": [
+    {
+      "id": "pupillen",
+      "naam": "Pupillen"
+    },
+    {
+      "id": "junioren",
+      "naam": "Junioren"
+    },
+    {
+      "id": "masters",
+      "naam": "Masters"
+    },
+    {
+      "id": "marathon",
+      "naam": "Marathonrijders"
+    }
+  ]
 }
