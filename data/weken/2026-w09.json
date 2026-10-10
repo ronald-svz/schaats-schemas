@@ -1,0 +1,33 @@
+{
+  "id": "2026-w09",
+  "titel": "Week 9",
+  "doel": "Techniek in de bocht en intensieve ronden in groepjes.",
+  "bijzonderheden": "",
+  "sessies": [
+    {
+      "type": "ijs",
+      "titel": "Training Deventer",
+      "datum": "2026-02-24",
+      "tijd": "",
+      "locatie": "Deventer",
+      "blokken": [
+        {"naam": "Blok 1: Warming-up", "minuten": 0, "zone": 1, "omschrijving": "Inlopen, rekken, mobiliseren", "items": [
+          {"oef": "inrijden", "detail": "Eenmaal op de baan kun je gelijk inrijden. Daarna nog eens gezamenlijk 6 ronden rustig inrijden."},
+          {"oef": "steigerungen-ijs", "detail": "2x 200/400r, 1x 300/500r. RUSTIGE opbouw naar de bocht; bocht doorversnellen met accent op het laatste deel van de bocht."}
+        ]},
+        {"naam": "Blok 2: Tempo rondjes 80-90%", "minuten": 0, "zone": 4, "items": [
+          {"oef": "tempo-rondjes", "detail": "5x 700/500r. Begin rechte eind na de 500m-finish; eerste 300m steigerung, daarna 400m tempo eindigend op de 500m-finishlijn."}
+        ]},
+        {"naam": "Techniek", "minuten": 0, "omschrijving": "Op verzoek, individuele aandacht", "items": [
+          {"oef": "techniek-heup-knie", "detail": "Rechter heup laten zakken, rechter knie omhoog en naar de andere knie"}
+        ]},
+        {"naam": "Blok 3: Intensief duur (60-70%)", "minuten": 0, "zone": 2, "items": [
+          {"oef": "intensief-duur", "detail": "8 ronden/800r ... tot einde training. Groepjes van max 4. Kop over kop; achterste van de groep zet aan en neemt binnendoor in de bocht RUSTIG de kop over. Laatste ronde aanzetten met eindsprint naar de 500 finishlijn."}
+        ]},
+        {"naam": "Blok 4: Cooling-down", "minuten": 0, "zone": 1, "items": [
+          {"oef": "uitrijden-stretchen", "detail": "Rustig uitrijden. Uitlopen, licht stretchen."}
+        ]}
+      ]
+    }
+  ]
+}

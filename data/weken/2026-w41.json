@@ -1,0 +1,55 @@
+{
+  "id": "2026-w41",
+  "titel": "Week 41",
+  "doel": "Schaatsoefeningen met name gericht op bochttechniek. Korte intensieve intervallen (uithoudingsvermogen, snelheid).",
+  "trainingsblok": "VP2",
+  "intensiteit": "60%",
+  "bijzonderheden": "Vanaf woensdag 21 oktober, 19:00 uur, indoortraining in gymzaal Zwarteweg Zwolle-Zuid.",
+  "sessies": [
+    {
+      "type": "droog",
+      "titel": "Indoor droogtraining",
+      "datum": "2026-10-05",
+      "tijd": "19:00",
+      "locatie": "Greijdanus, gymzaal 4 (Campus 5 Zwolle)",
+      "blokken": [
+        {"naam": "Warming-up", "minuten": 15, "zone": 1, "items": [{"oef": "inlopen-dynamisch", "detail": "Inlopen, dynamische oefeningen, coördinatie- en stabiliteitsoefeningen"}]},
+        {"naam": "Steigerungen / start / sprint", "minuten": 10, "items": [{"oef": "steigerungen-droog", "detail": "Steigerungen, starten, sprinten en snelheid"}]},
+        {"naam": "Schaatstechniek", "minuten": 10, "items": [{"oef": "bochtpassen-cornerbelt", "detail": "Bochtpassen in de cornerbelt"}, {"oef": "schaatssprongen", "detail": "Schaatspassen en -sprongen (coördinatie, gericht op techniek)"}]},
+        {"naam": "Rompstabiliteit en coördinatie", "minuten": 10, "items": [{"oef": "rompstabiliteit", "detail": "Diverse oefeningen: statisch en dynamisch (planken, buik, rug)"}]},
+        {"naam": "Kracht- en sprongoefeningen", "minuten": 10, "items": [{"oef": "kracht-boxjumps", "detail": "Diverse krachtoefeningen en sprongen (o.a. boxjumps), afsluiten met techniekoefeningen"}]},
+        {"naam": "Cooling-down", "minuten": 5, "zone": 1, "items": [{"oef": "uitlopen-rekken", "detail": "Uitlopen en enkele statische rekoefeningen"}]}
+      ]
+    },
+    {
+      "type": "droog",
+      "titel": "Droogtraining",
+      "datum": "2026-10-07",
+      "tijd": "19:00",
+      "locatie": "Sportpark HTC (Brinkhoekweg 200 Zwolle)",
+      "blokken": [
+        {"naam": "Warming-up", "minuten": 20, "zone": 1, "items": [{"oef": "inlopen-dynamisch", "detail": "Inlopen, dynamische oefeningen"}, {"oef": "versnellingen-sprint", "detail": "Enkele versnellingen en sprint"}]},
+        {"naam": "Schaatspassen (incl. cornerbelt)", "minuten": 15, "items": [{"oef": "schaatspassen-zijwaarts", "detail": "4' zijwaarts links/rechts - rust 2'"}, {"oef": "bochtpassen-cornerbelt", "detail": "Bochtpassen 4x 30'' - rust 2'"}]},
+        {"naam": "Rust - herstelloop", "minuten": 5, "zone": 1, "items": [{"oef": "herstelloop", "detail": "Rustige herstelloop"}]},
+        {"naam": "Schaatssprongen", "minuten": 10, "items": [{"oef": "schaatssprongen", "detail": "Schaatssprongen (stabilisatie, techniek): diverse sprongen"}, {"oef": "sprongen-spreid-sluit-skipping", "detail": "Zijwaarts links/rechts, spreid-sluit, skipping (30'' - rust 1')"}]},
+        {"naam": "Uithoudingsvermogen - interval", "minuten": 30, "zone": 4, "items": [{"oef": "hardlopen-interval", "detail": "Zone 4 (90%): 3x 1.000m met korte intervallen, volledige rust tussen de series"}]},
+        {"naam": "Cooling-down", "minuten": 10, "zone": 1, "items": [{"oef": "uitlopen-rekken", "detail": "Uitlopen naar de kleedkamers en enkele statische rekoefeningen"}]}
+      ]
+    },
+    {
+      "type": "rust",
+      "titel": "Geen skeelertraining",
+      "datum": "2026-10-09",
+      "tekst": "Geen skeelertraining vanwege de start van het schaatsseizoen. Probeer voor jezelf nog een rustige rit (60-90 minuten) te maken op de racefiets of hardlopen (ca. 45 minuten).",
+      "blokken": []
+    },
+    {
+      "type": "weekend",
+      "titel": "Weekend: duurrit op de racefiets",
+      "datum": "2026-10-10",
+      "tekst": "Extensieve duurtraining met versnellingen, 90-120 minuten (met bijvoorbeeld korte versnellingen op een heuvel of tot het plaatsnaambord).",
+      "blokken": [],
+      "items": [{"oef": "duurrit-racefiets", "detail": "90-120 minuten, zaterdag of zondag"}]
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "oefeningen": [
+    {
+      "id": "inlopen-dynamisch",
+      "naam": "Inlopen en dynamische oefeningen",
+      "thema": ["warming-up"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Rustig inlopen, daarna dynamische oefeningen (hoge knieën, hakken-billen, zijwaarts, armzwaaien) en coördinatie- en stabiliteitsoefeningen om lichaam en gewrichten op te warmen.",
+      "coachpunten": ["Begin rustig, bouw op", "Let op een stabiele romp en soepele enkels", "Zone 1, het voelt zeer licht aan"],
+      "beelden": []
+    },
+    {
+      "id": "versnellingen-sprint",
+      "naam": "Versnellingen en sprint",
+      "thema": ["warming-up", "snelheid"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Een paar korte versnellingen en een sprint na het inlopen, zodat het systeem klaar is voor het intensieve deel.",
+      "coachpunten": ["Opbouwen, niet meteen vol", "Volledig herstellen tussen de sprints"],
+      "beelden": []
+    },
+    {
+      "id": "steigerungen-droog",
+      "naam": "Steigerungen, start en sprint",
+      "thema": ["snelheid", "start"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Geleidelijk versnellen over een vaste afstand (steigerung), plus starten en sprinten.",
+      "coachpunten": ["Rustige opbouw, kracht pas aan het einde", "Eerste passen kort en explosief bij de start"],
+      "beelden": [{"type": "animatie", "anim": "steigerung", "bijschrift": "Rustig opbouwen en richting het einde versnellen"}]
+    },
+    {
+      "id": "bochtpassen-cornerbelt",
+      "naam": "Bochtpassen in de cornerbelt",
+      "thema": ["techniek", "bocht"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Bochtpassen met de cornerbelt: je zakt door je benen en loopt de bocht met een schuine houding, zoals op het ijs. Meestal in blokken van 30 seconden, de laatste 10 seconden versnellen.",
+      "coachpunten": ["Diep zitten, borst naar voren", "Afzet loodrecht op de glijrichting", "Gelijke druk op beide benen"],
+      "beelden": [{"type": "foto", "src": "img/a-afzet.jpg", "bijschrift": "Afzet loodrecht op de glijrichting"}]
+    },
+    {
+      "id": "schaatspassen-zijwaarts",
+      "naam": "Schaatspassen zijwaarts links/rechts",
+      "thema": ["techniek"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Schaatspassen zijwaarts naar links en rechts, in blokken van enkele minuten. Je oefent de zijwaartse afzet en het balanceren op één been.",
+      "coachpunten": ["Heup laag, bovenlichaam stil", "Volledige strek van het afzetbeen", "Landen op de buitenkant van de voet"],
+      "beelden": []
+    },
+    {
+      "id": "schaatssprongen",
+      "naam": "Schaatssprongen",
+      "thema": ["techniek", "kracht", "stabiliteit"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Sprongen die de schaatsbeweging nabootsen: zijwaarts links/rechts, schuin voorwaarts, met en zonder elastiek. Tussen de series rusten.",
+      "coachpunten": ["Zacht landen en meteen stabiel staan", "Heup onder controle, knie boven de voet", "Elastiek geeft extra zijwaartse weerstand"],
+      "beelden": []
+    },
+    {
+      "id": "sprongen-spreid-sluit-skipping",
+      "naam": "Spreid-sluit en skipping",
+      "thema": ["coordinatie", "kracht"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Spreid-sluitsprongen en skipping (hoge knieën, snelle voetcontacten) voor coördinatie, snelheid en enkelstijfheid.",
+      "coachpunten": ["Kort grondcontact", "Rechtop zitten en met de armen meewerken"],
+      "beelden": []
+    },
+    {
+      "id": "rompstabiliteit",
+      "naam": "Rompstabiliteit en coördinatie",
+      "thema": ["kracht", "stabiliteit"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Oefeningen voor de romp, statisch en dynamisch: planken, buik en rug. Een stabiele romp is de basis voor een rustige, krachtige schaatshouding.",
+      "coachpunten": ["Heupen niet laten zakken bij de plank", "Rustig doorademen", "Kwaliteit boven aantal"],
+      "beelden": []
+    },
+    {
+      "id": "kracht-boxjumps",
+      "naam": "Kracht- en sprongoefeningen (o.a. boxjumps)",
+      "thema": ["kracht"],
+      "types": ["droog"],
+      "niveau": "gevorderd",
+      "uitleg": "Diverse krachtoefeningen en sprongen, onder andere boxjumps. Afsluiten met techniekoefeningen.",
+      "coachpunten": ["Zacht landen op de box en op de grond", "Stap af in plaats van terug te springen als je moe wordt", "Techniek eerst, daarna snelheid"],
+      "beelden": []
+    },
+    {
+      "id": "herstelloop",
+      "naam": "Rustige herstelloop",
+      "thema": ["herstel"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Een korte, zeer rustige loop om te herstellen tussen twee inspannende onderdelen.",
+      "coachpunten": ["Zone 1, praten moet kunnen"],
+      "beelden": []
+    },
+    {
+      "id": "hardlopen-interval",
+      "naam": "Hardlopen interval zone 4",
+      "thema": ["conditie"],
+      "types": ["droog"],
+      "niveau": "gevorderd",
+      "uitleg": "Intervaltraining hardlopen op ongeveer 90% van de maximale hartslag (zone 4), met korte of volledige rust tussen de herhalingen.",
+      "coachpunten": ["Eerste herhaling niet te hard starten", "Houd de snelheid gelijk over alle herhalingen"],
+      "beelden": []
+    },
+    {
+      "id": "uitlopen-rekken",
+      "naam": "Uitlopen en statisch rekken",
+      "thema": ["cooling-down", "herstel"],
+      "types": ["droog"],
+      "niveau": "alle",
+      "uitleg": "Rustig uitlopen naar de kleedkamers en een paar statische rekoefeningen voor benen, heupen en rug.",
+      "coachpunten": ["Houd elke rek 20 tot 30 seconden vast", "Niet veren"],
+      "beelden": [{"type": "foto", "src": "img/b-droogtraining.jpg", "bijschrift": "Inspiratie voor de droogtraining"}]
+    },
+    {
+      "id": "duurrit-racefiets",
+      "naam": "Duurrit op de racefiets",
+      "thema": ["conditie"],
+      "types": ["weekend"],
+      "niveau": "alle",
+      "uitleg": "Extensieve duurtraining op de racefiets, met korte versnellingen, bijvoorbeeld op een heuvel of tot het volgende plaatsnaambord.",
+      "coachpunten": ["Zone 2, in volle zinnen praten", "Neem eten en drinken mee"],
+      "beelden": []
+    },
+    {
+      "id": "inrijden",
+      "naam": "Inrijden",
+      "thema": ["warming-up"],
+      "types": ["ijs"],
+      "niveau": "alle",
+      "uitleg": "Eenmaal op de baan kun je gelijk inrijden. Samen rijden we daarna nog 6 ronden rustig in.",
+      "coachpunten": ["Gelijk diep zitten", "Rustige opbouw naar de bocht", "Door de bocht versnellen met accent op het laatste deel"],
+      "beelden": [{"type": "foto", "src": "img/a-afzet.jpg", "bijschrift": "Afzet loodrecht op de glijrichting"}]
+    },
+    {
+      "id": "steigerungen-ijs",
+      "naam": "Steigerungen op het ijs",
+      "thema": ["warming-up", "snelheid"],
+      "types": ["ijs"],
+      "niveau": "alle",
+      "uitleg": "Steigerungen ter opwarming van het systeem, bijvoorbeeld 2x 200/400r en 1x 300/500r. Rustige opbouw naar de bocht en dan de bocht doorversnellen.",
+      "coachpunten": ["RUSTIGE opbouw naar de bocht", "Bocht doorversnellen met accent op het laatste deel van de bocht", "Gelijke druk met beide benen"],
+      "beelden": [{"type": "animatie", "anim": "steigerung", "bijschrift": "Rustig beginnen, in de bocht doorversnellen"}]
+    },
+    {
+      "id": "tempo-rondjes",
+      "naam": "Tempo rondjes (80-90%)",
+      "thema": ["conditie", "snelheid"],
+      "types": ["ijs"],
+      "niveau": "alle",
+      "uitleg": "Begin op het rechte eind na de 500m-finish. De eerste 300m is een steigerung, daarna 400m tempo eindigend op de 500m-finishlijn.",
+      "coachpunten": ["Eerste 300m opbouwen, niet te snel starten", "Laatste 400m op tempo en strak naar de finish"],
+      "beelden": []
+    },
+    {
+      "id": "techniek-heup-knie",
+      "naam": "Techniek: heup laten zakken, knie omhoog",
+      "thema": ["techniek"],
+      "types": ["ijs"],
+      "niveau": "alle",
+      "uitleg": "Op verzoek individuele aandacht voor de techniek. Zie de beelden: let op de rechter heup die zakt en de rechter knie die omhoog en naar de andere knie gaat, en op de lijnen van de bocht.",
+      "coachpunten": ["Rechter heup laten zakken", "Rechter knie omhoog en naar de andere knie", "Houd het hoofd stil en kijk vooruit"],
+      "beelden": [
+        {"type": "foto", "src": "img/a-heup-knie.jpg", "bijschrift": "Rechter heup laten zakken, rechter knie omhoog en naar de andere knie"},
+        {"type": "foto", "src": "img/a-bochtlijnen.jpg", "bijschrift": "Lijnen door de bocht: paars de heuplijn, geel de beenlijnen"}
+      ]
+    },
+    {
+      "id": "intensief-duur",
+      "naam": "Intensief duur (60-70%)",
+      "thema": ["conditie"],
+      "types": ["ijs"],
+      "niveau": "alle",
+      "uitleg": "Lange blokken ronden in groepjes van maximaal 4, kop over kop. De laatste ronde zet je aan met een eindsprint naar de 500m-finishlijn.",
+      "coachpunten": ["Achterste van de groep zet aan en neemt binnendoor in de bocht RUSTIG de kop over", "Laatste ronde aanzetten met eindsprint"],
+      "beelden": [{"type": "animatie", "anim": "kop-over-kop", "bijschrift": "De achterste rijdt langs de binnenkant naar voren"}]
+    },
+    {
+      "id": "intensief-interval",
+      "naam": "Intensief interval (85%)",
+      "thema": ["conditie", "techniek"],
+      "types": ["ijs"],
+      "niveau": "gevorderd",
+      "uitleg": "Series van 4x 400m met steeds een serie rust. Technische aandachtspunten in de bocht en op het rechte stuk.",
+      "coachpunten": ["Bocht: inzakken en aanzetten", "Recht: accent op de C-curve (naar binnen gedraaide knie)"],
+      "beelden": [{"type": "foto", "src": "img/b-ccurve.jpg", "bijschrift": "C-curve: knie naar binnen gedraaid in de afzet"}]
+    },
+    {
+      "id": "team-pursuit",
+      "naam": "Team Pursuit",
+      "thema": ["conditie", "teamwork"],
+      "types": ["ijs"],
+      "niveau": "gevorderd",
+      "uitleg": "Blokjes van 4 ronden in team, kop over kop. Zorg dat de wissels vloeiend gaan.",
+      "coachpunten": ["Houd de onderlinge afstand klein", "Wissel vloeiend en zonder snelheidsverlies"],
+      "beelden": [
+        {"type": "foto", "src": "img/b-teampursuit.jpg", "bijschrift": "Team Pursuit met drie rijders"},
+        {"type": "animatie", "anim": "kop-over-kop", "bijschrift": "Wisselen: de achterste neemt de kop over"}
+      ]
+    },
+    {
+      "id": "uitrijden-stretchen",
+      "naam": "Uitrijden, uitlopen en licht stretchen",
+      "thema": ["cooling-down", "herstel"],
+      "types": ["ijs"],
+      "niveau": "alle",
+      "uitleg": "Rustig uitrijden, daarna uitlopen en licht stretchen om te herstellen.",
+      "coachpunten": ["Rustig en zonder druk", "Licht stretchen, niet forceren"],
+      "beelden": []
+    }
+  ],
+  "zones": [
+    {"zone": 1, "naam": "Herstel", "intensiteit": "50%-60%", "gevoel": "Warming-up / cooling-down / herstel, voelt zeer licht aan"},
+    {"zone": 2, "naam": "Rustig", "intensiteit": "60%-70%", "gevoel": "Basisconditie, comfortabel, lang kunnen volhouden, in volle zinnen praten"},
+    {"zone": 3, "naam": "Matig", "intensiteit": "70%-80%", "gevoel": "Uithoudingsvermogen, licht vermoeide spieren, korte zinnen praten"},
+    {"zone": 4, "naam": "Hard", "intensiteit": "80%-90%", "gevoel": "Verhoogde prestatie, vermoeide spieren, losse woorden praten (hijgen)"},
+    {"zone": 5, "naam": "Maximaal", "intensiteit": "90%-100%", "gevoel": "Maximale inspanning, vermoeide of verzuurde spieren, zwaar hijgen"}
+  ]
+}
