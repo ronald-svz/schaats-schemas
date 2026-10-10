@@ -1,0 +1,73 @@
+{
+  "id": "2026-w01",
+  "titel": "Test RtB 1",
+  "doel": "Laatste training op de dinsdag van het seizoen.",
+  "bijzonderheden": "Ben benieuwd of upload nu lukt",
+  "sessies": [
+    {
+      "type": "ijs",
+      "titel": "Training Deventer",
+      "datum": "2026-03-03",
+      "locatie": "Deventer",
+      "blokken": [
+        {
+          "naam": "Blok 1: Warming-up",
+          "minuten": 0,
+          "zone": 1,
+          "items": [
+            {
+              "oef": "inrijden",
+              "detail": "6 ronden inrijden. Daarna nog eens gezamenlijk 6 ronden rustig inrijden: gelijk diep zitten, rustige opbouw, doorversnellen in de bocht MET GELIJKE DRUK BEIDE BENEN."
+            },
+            {
+              "oef": "steigerungen-ijs",
+              "detail": "2x 200/400, 2x 300/500. Laatste 100m van de 300m na de bocht: inzakken en accent op het laatste deel van de S-bocht."
+            }
+          ]
+        },
+        {
+          "naam": "Blok 2: Intensief interval 85%",
+          "minuten": 0,
+          "zone": 4,
+          "items": [
+            {
+              "oef": "intensief-interval",
+              "detail": "3 series van 4x 400/400r, Sr 600. Bocht: inzakken en aanzetten. Recht: accent op de C-curve (naar binnen gedraaide knie, zie het voorbeeld van Femke Kok)."
+            }
+          ]
+        },
+        {
+          "naam": "Blok 3: Team Pursuit",
+          "minuten": 0,
+          "items": [
+            {
+              "oef": "team-pursuit",
+              "detail": "Blokjes van 4 ronden."
+            }
+          ]
+        },
+        {
+          "naam": "Blok 4: Cooling-down",
+          "minuten": 0,
+          "zone": 1,
+          "items": [
+            {
+              "oef": "uitrijden-stretchen",
+              "detail": "Rustig uitrijden, uitlopen, licht stretchen."
+            },
+            {
+              "oef": "uitlopen-rekken",
+              "detail": "Inspiratie voor de droogtraining in de zomer?"
+            }
+          ]
+        },
+        {
+          "naam": "Blok 5: Chocomel",
+          "minuten": 0,
+          "omschrijving": "Tot volgend seizoen op het ijs!",
+          "items": []
+        }
+      ]
+    }
+  ]
+}
