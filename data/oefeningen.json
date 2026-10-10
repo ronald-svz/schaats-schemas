@@ -441,59 +441,6 @@
         "Licht stretchen, niet forceren"
       ],
       "beelden": []
-    },
-    {
-      "id": "proef-oefening",
-      "naam": "Proef-oefening (wordt verwijderd)",
-      "thema": [
-        "techniek"
-      ],
-      "types": [
-        "ijs"
-      ],
-      "niveau": "alle",
-      "uitleg": "Testoefening voor de publicatiedienst.",
-      "coachpunten": [
-        "Dit is een test"
-      ],
-      "beelden": [
-        {
-          "type": "animatie",
-          "anim": "scene",
-          "scene": {
-            "rijders": [
-              {
-                "naam": "1",
-                "kleur": "#e0802a"
-              }
-            ],
-            "stappen": [
-              {
-                "duur": 1,
-                "tekst": "Start",
-                "posities": [
-                  {
-                    "s": 0.1,
-                    "in": 0
-                  }
-                ]
-              },
-              {
-                "duur": 1,
-                "tekst": "Verder",
-                "posities": [
-                  {
-                    "s": 0.4,
-                    "in": 0
-                  }
-                ]
-              }
-            ],
-            "lus": true
-          },
-          "bijschrift": "Proef"
-        }
-      ]
     }
   ],
   "zones": [
