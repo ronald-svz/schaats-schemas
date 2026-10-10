@@ -3,6 +3,7 @@
 (function () {
   'use strict';
 
+  const BASE = ''; // gegevens en foto's staan naast de pagina
   const app = document.getElementById('app');
   const cache = { index: null, oef: null, weken: {} };
   const TYPES = { droog: 'Droogtraining', ijs: 'IJstraining', weekend: 'Weekend', rust: 'Rustdag' };
@@ -47,16 +48,16 @@
     return r.json();
   }
   async function laadBasis() {
-    if (!cache.index) cache.index = await haal('data/index.json');
-    if (!cache.config) cache.config = await haal('data/config.json').catch(() => ({}));
+    if (!cache.index) cache.index = await haal(BASE + 'data/index.json');
+    if (!cache.config) cache.config = await haal(BASE + 'data/config.json').catch(() => ({}));
     if (!cache.oef) {
-      const o = await haal('data/oefeningen.json');
+      const o = await haal(BASE + 'data/oefeningen.json');
       cache.oef = o; cache.oefById = {};
       o.oefeningen.forEach((x) => { cache.oefById[x.id] = x; });
     }
   }
   async function laadWeek(id) {
-    if (!cache.weken[id]) cache.weken[id] = await haal('data/weken/' + encodeURIComponent(id) + '.json');
+    if (!cache.weken[id]) cache.weken[id] = await haal(BASE + 'data/weken/' + encodeURIComponent(id) + '.json');
     return cache.weken[id];
   }
   function maakCopyLink(url) {
@@ -71,7 +72,7 @@
     return m ? m[1] : null;
   }
   function beeld(b) {
-    if (b.type === 'animatie') return h('figure', null, window.maakAnimatie(b.anim), b.bijschrift && h('figcaption', { text: b.bijschrift }));
+    if (b.type === 'animatie') return h('figure', null, window.maakAnimatie(b.anim, b), b.bijschrift && h('figcaption', { text: b.bijschrift }));
     if (b.type === 'video') {
       const id = youtubeId(b.url);
       if (!id) return h('p', null, h('a', { href: b.url, target: '_blank', rel: 'noopener', text: b.bijschrift || 'Bekijk video' }));
@@ -82,10 +83,10 @@
       });
       return h('figure', null, box, b.bijschrift && h('figcaption', { text: b.bijschrift }));
     }
-    const img = h('img', { src: b.src, alt: b.bijschrift || '', loading: 'lazy' });
+    const img = h('img', { src: BASE + b.src, alt: b.bijschrift || '', loading: 'lazy' });
     img.addEventListener('click', () => {
       const d = document.getElementById('lightbox');
-      d.querySelector('img').src = b.src; d.querySelector('img').alt = b.bijschrift || '';
+      d.querySelector('img').src = BASE + b.src; d.querySelector('img').alt = b.bijschrift || '';
       d.querySelector('p').textContent = b.bijschrift || '';
       d.showModal();
     });
@@ -216,13 +217,14 @@
       lijst.replaceChildren(...(res.length ? res.map((o) => h('details', { class: 'kaart oef', id: 'o-' + o.id },
         h('summary', null, o.naam, ...(o.types || []).map((t) => h('span', { class: 'chip ' + t, text: TYPES[t] || t })), (o.beelden || []).length ? h('span', { class: 'chip', text: 'beeld' }) : null),
         h('div', { class: 'meta', style: 'padding:0 12px', text: (o.thema || []).join(' · ') + (o.niveau ? ' · niveau ' + o.niveau : '') }),
-        oefeningInhoud(o))) : [h('p', { class: 'leeg', text: 'Geen oefeningen gevonden.' })]));
+        oefeningInhoud(o),
+        h('p', { style: 'padding:0 12px 12px;margin:0' }, h('a', { href: '#/oefening-maken/' + o.id, text: 'Bewerk deze oefening' })))) : [h('p', { class: 'leeg', text: 'Geen oefeningen gevonden.' })]));
     }
     zoek.addEventListener('input', () => { staat.zoek = zoek.value; toon(); });
     chipSet(typeChips, [['', 'Alle'], ['droog', 'Droog'], ['ijs', 'IJs'], ['weekend', 'Weekend']], 'type');
     chipSet(themaChips, [['', 'Alle thema\'s']].concat(themas.map((t) => [t, t])), 'thema');
     toon();
-    const out = h('div', null, h('h1', { text: 'Oefeningen' }), h('div', { class: 'filters' }, zoek, typeChips, themaChips), lijst);
+    const out = h('div', null, h('div', { class: 'rij', style: 'justify-content:space-between;margin-bottom:8px' }, h('h1', { text: 'Oefeningen', style: 'margin:0' }), h('a', { class: 'knop klein', href: '#/oefening-maken', text: '+ Nieuwe oefening' })), h('div', { class: 'filters' }, zoek, typeChips, themaChips), lijst);
     if (zoekparam) {
       const d = lijst.querySelector('#o-' + CSS.escape(zoekparam));
       if (d) { d.open = true; setTimeout(() => d.scrollIntoView({ block: 'start' }), 50); }
@@ -341,21 +343,21 @@
       update();
     }
     function publiceerKaart() {
-      const SLEUTEL = 'schaats-gh-token';
+      const SLEUTEL = 'schaats-clubcode';
       let bewaard = '';
       try { bewaard = localStorage.getItem(SLEUTEL) || ''; } catch (e) { /* ignore */ }
-      const token = h('input', { type: 'password', autocomplete: 'off', placeholder: 'Plak hier je toegangssleutel (github_pat_…)', value: bewaard });
+      const code = h('input', { type: 'password', autocomplete: 'off', placeholder: 'Clubcode', value: bewaard });
       const status = h('p', { class: 'meta', role: 'status' });
       const knop = h('button', { type: 'button', class: 'knop' }, 'Publiceer schema');
-      const ingesteld = Boolean(cache.config && cache.config.owner && cache.config.repo);
+      const ingesteld = Boolean(cache.config && cache.config.publiceren_url);
       knop.addEventListener('click', async () => {
         status.textContent = ''; status.style.color = '';
         knop.disabled = true; knop.textContent = 'Bezig met publiceren…';
         try {
-          try { localStorage.setItem(SLEUTEL, token.value.trim()); } catch (e) { /* ignore */ }
-          await window.publiceerSchema(bw, schoon(bw), cache.config, token.value.trim());
+          try { localStorage.setItem(SLEUTEL, code.value.trim()); } catch (e) { /* ignore */ }
+          await window.publiceerSchema(bw, schoon(bw), cache.config, code.value.trim());
           delete cache.weken[bw.id]; cache.index = null;
-          const link = location.origin + location.pathname + '#/week/' + bw.id;
+          const link = location.origin + location.pathname.replace(/v2\/?$/, '') + '#/week/' + bw.id;
           status.replaceChildren('Gepubliceerd. Over ongeveer een minuut staat het live op ', h('a', { href: link, text: link }), '. Deel die link in WhatsApp. ',
             h('button', { type: 'button', class: 'knop klein licht', onclick: () => maakCopyLink(link) }, 'Deel link'));
         } catch (e) {
@@ -364,9 +366,9 @@
       });
       return h('section', { class: 'kaart', style: 'margin-top:16px' },
         h('h2', { text: 'Publiceren' }),
-        ingesteld ? h('p', { class: 'meta', text: 'Zet het schema met één klik online en voegt het toe aan het weekoverzicht. De sleutel blijft alleen in deze browser.' })
-          : h('div', { class: 'kader', text: 'Publiceren is nog niet ingesteld: vul data/config.json in (zie README). Tot die tijd kun je het schema zelf opslaan (onderaan).' }),
-        veld('Toegangssleutel (eenmalig)', token), h('div', { class: 'rij', style: 'margin-top:10px' }, knop), status);
+        ingesteld ? h('p', { class: 'meta', text: 'Zet het schema met één klik online. Vul eenmalig de clubcode in, die krijg je van de beheerder.' })
+          : h('div', { class: 'kader', text: 'Publiceren is nog niet ingesteld: vul publiceren_url in data/config.json in (zie README). Tot die tijd kun je het schema zelf opslaan (onderaan).' }),
+        veld('Clubcode (eenmalig)', code), h('div', { class: 'rij', style: 'margin-top:10px' }, knop), status);
     }
     function downloadWeek() {
       if (!bw.id || !ids()) { toast('Vul eerst een code in, zoals 2026-w42'); return; }
@@ -383,17 +385,30 @@
     return h('div', null, h('a', { class: 'terug', href: '#/bouwer', text: '← Terug naar de bouwer' }), weekWeergave(w, { voorbeeld: true }));
   }
 
+  window.__app = { h, cache, laadBasis, toast, veld, TYPES, oefeningInhoud };
+
   // ---------- router ----------
   async function route() {
-    const hash = location.hash.replace(/^#/, '') || '/';
+    let hash = location.hash.replace(/^#/, '') || '/';
+    const q = hash.indexOf('?');
+    if (q >= 0) {
+      const params = new URLSearchParams(hash.slice(q + 1));
+      hash = hash.slice(0, q);
+      if (params.get('code')) {
+        try { localStorage.setItem('schaats-clubcode', params.get('code')); } catch (e) { /* ignore */ }
+        history.replaceState(null, '', location.pathname + '#' + hash); // code niet in de adresbalk laten staan
+        toast('Clubcode opgeslagen');
+      }
+    }
     const delen = hash.split('/').filter(Boolean);
     const sleutel = delen[0] || 'home';
-    document.querySelectorAll('.topbar nav a').forEach((a) => a.classList.toggle('actief', a.dataset.nav === (sleutel === 'week' ? 'home' : sleutel === 'voorbeeld' ? 'bouwer' : sleutel)));
+    document.querySelectorAll('.topbar nav a').forEach((a) => a.classList.toggle('actief', a.dataset.nav === (sleutel === 'week' ? 'home' : (sleutel === 'voorbeeld' || sleutel === 'oefening-maken') ? 'bouwer' : sleutel)));
     document.title = 'Trainingsschema\'s Schaatsvereniging Zwolle';
     let pagina;
     try {
       if (sleutel === 'week' && delen[1]) pagina = await paginaWeek(decodeURIComponent(delen[1]));
       else if (sleutel === 'oefeningen') pagina = await paginaOefeningen(delen[1] && decodeURIComponent(delen[1]));
+      else if (sleutel === 'oefening-maken') pagina = await window.__editor.pagina(delen[1] && decodeURIComponent(delen[1]));
       else if (sleutel === 'bouwer') pagina = await paginaBouwer();
       else if (sleutel === 'voorbeeld') pagina = await paginaVoorbeeld();
       else pagina = await paginaHome();

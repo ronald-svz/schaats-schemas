@@ -1,9 +1,9 @@
 # Publicatiedienst (Cloudflare Worker)
 
-Deze kleine dienst zit tussen de bouwer in v2 en GitHub. De trainer vult een **clubcode** in. De dienst controleert die en schrijft het schema of de oefening naar GitHub. De GitHub-sleutel staat alleen in de dienst en komt nooit in een browser.
+Deze kleine dienst zit tussen de bouwer en GitHub. De trainer vult een **clubcode** in. De dienst controleert die en schrijft het schema of de oefening naar GitHub. De GitHub-sleutel staat alleen in de dienst en komt nooit in een browser.
 
 ```
-Trainer (v2)  --clubcode + schema-->  Worker  --GitHub-sleutel-->  GitHub  -->  GitHub Pages  -->  site
+Trainer  --clubcode + schema-->  Worker  --GitHub-sleutel-->  GitHub  -->  GitHub Pages  -->  site
 ```
 
 De dienst kan drie dingen:
@@ -33,7 +33,7 @@ De namen van de knoppen bij Cloudflare kunnen iets afwijken, de volgorde blijft 
    ```
    Zet dit bestand daarna op GitHub, net als de andere bestanden.
 6. **Link voor trainers.** Stuur elke trainer een persoonlijke link, zodat de code vanzelf wordt opgeslagen:
-   `https://ronald-svz.github.io/schaats-schemas/v2/#/bouwer?code=kerstboom7`
+   `https://ronald-svz.github.io/schaats-schemas/#/bouwer?code=kerstboom7`
    De code verdwijnt na het openen uit de adresbalk en wordt in de browser onthouden.
 
 ## Een code intrekken

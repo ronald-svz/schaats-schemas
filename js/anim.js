@@ -108,15 +108,65 @@
     };
   }
 
-  const ANIMATIES = { 'kop-over-kop': koprover, 'steigerung': steigerung };
+
+  // Zelfgemaakte animatie: rijders op de ovale baan die van stap naar stap bewegen (keyframes).
+  // scene = { rijders: [{naam, kleur}], stappen: [{duur, tekst, posities: [{s, in}]}], lus: true }
+  //   s  = plaats langs de baan als fractie van een ronde (0 tot 1, tegen de klok in)
+  //   in = zijwaartse plaats, positief naar de binnenkant
+  function sceneAnim(b) {
+    const sc = (b && b.scene) || { rijders: [], stappen: [] };
+    const svg = el('svg', { viewBox: '26 16 288 136', role: 'img', 'aria-label': (b && b.bijschrift) || 'Animatie van rijders op de ijsbaan' });
+    svg.style.color = '#6b8fb3';
+    baan(svg);
+    const tekst = el('text', { x: 170, y: 88, 'text-anchor': 'middle', 'font-size': 12, fill: 'currentColor' }, svg);
+    const rijders = sc.rijders.map((r) => {
+      const g = el('g', {}, svg);
+      el('circle', { r: 9, fill: r.kleur || '#0b6fb8', stroke: '#fff', 'stroke-width': 1.5 }, g);
+      const t = el('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': 10, 'font-weight': 700, fill: '#fff' }, g);
+      t.textContent = (r.naam || '').slice(0, 3);
+      return g;
+    });
+    const st = sc.stappen;
+    const totaal = st.reduce((n, x) => n + (Number(x.duur) || 1), 0) || 1;
+    function plaats(i, k) { // plaats van rijder k in stap i
+      const p = (st[i].posities || [])[k] || { s: 0, in: 0 };
+      return { s: Number(p.s) || 0, ins: Number(p['in']) || 0 };
+    }
+    function teken(u) { // u = seconden binnen de ronde van de animatie
+      let acc = 0, i = 0;
+      for (; i < st.length - 1; i++) { const d = Number(st[i].duur) || 1; if (u < acc + d) break; acc += d; }
+      const d = Number(st[i].duur) || 1;
+      const f = ease(Math.min(1, Math.max(0, (u - acc) / d)));
+      const van = i === 0 ? (sc.lus === false ? 0 : st.length - 1) : i - 1;
+      rijders.forEach((g, k) => {
+        const a = plaats(van, k), c = plaats(i, k);
+        let ds = c.s - a.s; ds -= Math.round(ds); // kortste weg langs de baan
+        const pt = baanPunt((a.s + ds * f) * P, a.ins + (c.ins - a.ins) * f);
+        g.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')');
+      });
+      tekst.textContent = st[i].tekst || '';
+    }
+    return {
+      el: svg,
+      start(t0) {
+        return function frame(t) {
+          const sec = (t - t0) / 1000;
+          teken(sc.lus === false ? Math.min(sec, totaal - 0.001) : sec % totaal);
+        };
+      }
+    };
+  }
+  window.__baan = { baanPunt, P, baan, el, ease };
+
+  const ANIMATIES = { 'kop-over-kop': koprover, 'steigerung': steigerung, scene: sceneAnim };
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  window.maakAnimatie = function (naam) {
+  window.maakAnimatie = function (naam, beeld) {
     const maker = ANIMATIES[naam];
     const wrap = document.createElement('div');
     wrap.className = 'anim';
     if (!maker) { wrap.textContent = 'Animatie niet gevonden: ' + naam; return wrap; }
-    const a = maker();
+    const a = maker(beeld);
     wrap.appendChild(a.el);
     // Een eenvoudige timer (25 beelden/s) is genoeg voor deze kleine tekeningen en werkt overal.
     let timer = 0, frame = null;
