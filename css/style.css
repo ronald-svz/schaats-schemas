@@ -80,7 +80,7 @@ figcaption { font-size: .85rem; color: var(--zacht); margin-top: 4px; }
 .legenda li { display: grid; grid-template-columns: 90px 70px 1fr; gap: 8px; align-items: center; font-size: .9rem; }
 @media (max-width: 520px) { .legenda li { grid-template-columns: 80px 1fr; } .legenda li .gevoel { grid-column: 1 / -1; color: var(--zacht); } }
 .filters { display: grid; gap: 10px; margin-bottom: 14px; }
-input[type=text], input[type=search], input[type=date], input[type=time], input[type=number], select, textarea { width: 100%; padding: 9px 10px; border: 1px solid var(--rand); border-radius: 10px; background: var(--kaart); color: var(--tekst); font: inherit; }
+input[type=text], input[type=search], input[type=date], input[type=time], input[type=number], input[type=password], select, textarea { width: 100%; padding: 9px 10px; border: 1px solid var(--rand); border-radius: 10px; background: var(--kaart); color: var(--tekst); font: inherit; }
 textarea { min-height: 80px; resize: vertical; }
 label { display: grid; gap: 3px; font-size: .85rem; color: var(--zacht); font-weight: 600; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }

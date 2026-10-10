@@ -82,3 +82,15 @@ Voeg een blok toe aan `data/oefeningen.json`:
 ## Opmerkingen
 - De schema-bouwer bewaart een concept automatisch in de browser van de trainer (niet gedeeld).
 - Foto's `a-*.jpg` en `b-*.jpg` zijn uitgesneden uit de Word-schema's van 24 februari en 3 maart 2026.
+
+## Versie 2 (naast de huidige site)
+In de map `v2/` staat een tweede versie die naast de eerste draait: `https://ronald-svz.github.io/schaats-schemas/v2/`. De eerste versie blijft ongemoeid. Beide gebruiken dezelfde gegevens (`data/`) en foto's (`img/`).
+
+Wat v2 anders doet:
+- **Clubcode in plaats van GitHub-sleutel.** Trainers hoeven geen GitHub-account. Een kleine publicatiedienst (zie `worker/README.md`) zet het schema of de oefening online.
+- **Oefening maken** (`#/oefening-maken`): een oefening beschrijven met thema, uitleg en aandachtspunten, en een bestaande oefening bewerken.
+- **Eigen animatie maken:** rijders op de ijsbaan naar de juiste plek slepen, stap voor stap. De animatie rijdt zelf van stap naar stap. Met één stap maak je een stilstaande tekening. Beschikbare startvoorbeelden: kop over kop en steigerung.
+- **AI-hulp:** een voorstel voor de tekst en de animatie laten maken. Zonder instellingen kopieer je een kant-en-klare opdracht naar je eigen AI-assistent en plak je het antwoord terug. Met een API-sleutel in de publicatiedienst werkt het met één klik.
+- **YouTube-video's** aan een oefening koppelen.
+
+Publiceren in v2 werkt pas als `publiceren_url` in `data/config.json` is ingevuld.

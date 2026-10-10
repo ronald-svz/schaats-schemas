@@ -1,0 +1,12 @@
+name = "schaats-publicatie"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+GITHUB_OWNER = "ronald-svz"
+GITHUB_REPO = "schaats-schemas"
+GITHUB_BRANCH = "main"
+ALLOWED_ORIGINS = "https://ronald-svz.github.io"
+
+# Geheimen zet je NIET in dit bestand. Zie README.md:
+#   GITHUB_TOKEN  en  CLUB_CODES
